@@ -311,31 +311,34 @@
                     </div>
 
                     <!-- Dropdown Kelas (QoL) -->
-                    <div class="form-group">
-                        <label for="kelas">Kelas</label>
-                        <select id="kelas" name="kelas" required>
-                            <option value="" disabled selected>Pilih Kelas...</option>
-                            <optgroup label="Kelas X">
-                                <option value="X IPA 1">X IPA 1</option>
-                                <option value="X IPA 2">X IPA 2</option>
-                                <option value="X IPS 1">X IPS 1</option>
-                                <option value="X IPS 2">X IPS 2</option>
-                            </optgroup>
-                            <optgroup label="Kelas XI">
-                                <option value="XI IPA 1">XI IPA 1</option>
-                                <option value="XI IPA 2">XI IPA 2</option>
-                                <option value="XI IPS 1">XI IPS 1</option>
-                                <option value="XI IPS 2">XI IPS 2</option>
-                            </optgroup>
-                            <optgroup label="Kelas XII">
-                                <option value="XII IPA 1">XII IPA 1</option>
-                                <option value="XII IPA 2">XII IPA 2</option>
-                                <option value="XII IPS 1">XII IPS 1</option>
-                                <option value="XII IPS 2">XII IPS 2</option>
-                            </optgroup>
-                        </select>
-                    </div>
+               <!-- Input Kelas (QoL Interactive 2-Tap) -->
+<div class="form-group">
+    <label>Kelas</label>
+    <input type="hidden" id="kelas" name="kelas" required>
 
+    <!-- Step 1: Pilih Tingkat -->
+    <div class="class-level-group">
+        <button type="button" class="level-btn" data-prefix="X-E">10 (X-E)</button>
+        <button type="button" class="level-btn" data-prefix="XI-F">11 (XI-F)</button>
+        <button type="button" class="level-btn" data-prefix="XII-F">12 (XII-F)</button>
+    </div>
+
+    <!-- Step 2: Pilih Nomor (Grid 1 - 12) -->
+    <div class="class-number-grid hidden" id="classNumberGrid">
+        <button type="button" class="num-btn" data-num="1">1</button>
+        <button type="button" class="num-btn" data-num="2">2</button>
+        <button type="button" class="num-btn" data-num="3">3</button>
+        <button type="button" class="num-btn" data-num="4">4</button>
+        <button type="button" class="num-btn" data-num="5">5</button>
+        <button type="button" class="num-btn" data-num="6">6</button>
+        <button type="button" class="num-btn" data-num="7">7</button>
+        <button type="button" class="num-btn" data-num="8">8</button>
+        <button type="button" class="num-btn" data-num="9">9</button>
+        <button type="button" class="num-btn" data-num="10">10</button>
+        <button type="button" class="num-btn" data-num="11">11</button>
+        <button type="button" class="num-btn" data-num="12">12</button>
+    </div>
+</div>
                     <!-- Divisi Selection -->
                     <div class="form-group">
                         <label>Divisi</label>
