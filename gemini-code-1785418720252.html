@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presensi Ekstrakurikuler Administrator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fbfbfa;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --input-bg: #ffffff;
+            
+            /* Warna Soft Pink khusus Divisi */
+            --pink-soft: #fce7f3;
+            --pink-border: #fbcfe8;
+            --pink-text: #db2777;
+            
+            --primary-btn: #1e293b;
+            --primary-btn-hover: #0f172a;
+            
+            --radius-md: 14px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            background-color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .date-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .calendar-icon {
+            stroke: var(--text-muted);
+        }
+
+        /* Card Container */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #eaeaea;
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background-color: var(--input-bg);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]::placeholder {
+            color: #94a3b8;
+        }
+
+        input[type="text"]:focus {
+            border-color: #94a3b8;
+            box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.15);
+        }
+
+        /* Pill Buttons */
+        .pill-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pill-group.status-group {
+            flex-direction: row;
+        }
+
+        .pill-btn {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .pill-btn:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Active State - Soft Pink untuk Divisi */
+        .pill-btn.active {
+            background-color: var(--pink-soft);
+            border-color: var(--pink-border);
+            color: var(--pink-text);
+        }
+
+        /* Active State - Biru Soft untuk Status */
+        .status-group .pill-btn.active {
+            background-color: #e0f2fe;
+            border-color: #bae6fd;
+            color: #0284c7;
+        }
+
+        /* Button Utama */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-btn);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-btn-hover);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.99);
+        }
+
+        /* Secret Link Footer */
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .secret-link {
+            font-size: 12px;
+            color: #94a3b8;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .secret-link:hover {
+            color: #64748b;
+        }
+
+        /* Switcher Halaman */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Toast Notifikasi */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: #0f172a;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.error {
+            background-color: #ef4444;
+        }
+
+        /* Spinner Loading */
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- ==================== HALAMAN 1: FORM PRESENSI ==================== -->
+        <div id="viewPresensi">
+            <header class="header">
+                <div class="badge">EKSTRAKURIKULER</div>
+                <h1 class="title">Presensi Administrator</h1>
+                <div class="date-container">
+                    <svg class="calendar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span id="currentDate">Hari, Tanggal Bulan Tahun</span>
+                </div>
+            </header>
+
+            <main class="card">
+                <h2 class="card-title">Isi Presensi</h2>
+
+                <form id="presensiForm">
+                    <div class="form-group">
+                        <label for="nama">Nama lengkap</label>
+                        <input type="text" id="nama" name="nama" placeholder="Contoh: Nadia Rahmawati" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+                        <input type="text" id="kelas" name="kelas" placeholder="Contoh: XI IPA 3" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Divisi</label>
+                        <input type="hidden" id="divisi" name="divisi" required>
+                        <div class="pill-group" id="divisiGroup">
+                            <button type="button" class="pill-btn" data-value="Desain Grafis">Desain Grafis</button>
+                            <button type="button" class="pill-btn" data-value="Jurnalistik">Jurnalistik</button>
+                            <button type="button" class="pill-btn" data-value="Programming">Programming</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status kehadiran</label>
+                        <input type="hidden" id="status" name="status" value="Hadir" required>
+                        <div class="pill-group status-group" id="statusGroup">
+                            <button type="button" class="pill-btn status-btn active" data-value="Hadir">Hadir</button>
+                            <button type="button" class="pill-btn status-btn" data-value="Izin">Izin</button>
+                            <button type="button" class="pill-btn status-btn" data-value="Sakit">Sakit</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="catatan">Catatan (opsional)</label>
+                        <input type="text" id="catatan" name="catatan" placeholder="Contoh: Terlambat 10 menit / Izin Lomba" autocomplete="off">
+                    </div>
+
+                    <button type="submit" id="btnSubmit" class="btn-primary">
+                        <span id="btnText">Kirim Presensi</span>
+                        <div class="spinner" id="btnSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+            </main>
+
+            <!-- Link Rahasia di bagian bawah -->
+            <footer class="footer">
+                <a id="btnSecretPage" class="secret-link" title="Upload Dokumen / Berkas Admin">
+                    🔒 Upload Berkas Spreadsheet
+                </a>
+            </footer>
+        </div>
+
+
+        <!-- ==================== HALAMAN 2 (RAHASIA): UPLOAD FILE ==================== -->
+        <div id="viewUpload" class="hidden">
+            <header class="header">
+                <div class="badge">RAHASIA / ADMIN ONLY</div>
+                <h1 class="title">Upload Berkas Admin</h1>
+                <p style="color: #64748b; font-size: 14px;">Unggah 1 sampai 3 file dokumen/bukti ke Google Drive & Spreadsheet</p>
+            </header>
+
+            <main class="card">
+                <h2 class="card-title">Upload File (Max 3 Files)</h2>
+
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="uploaderNama">Nama Pengunggah</label>
+                        <input type="text" id="uploaderNama" placeholder="Contoh: Admin Programming" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan Dokumen</label>
+                        <input type="text" id="keterangan" placeholder="Contoh: Laporan / Bukti Surat" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file1">File Utama (Wajib)</label>
+                        <input type="file" id="file1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file2">File Tambahan 1 (Opsional)</label>
+                        <input type="file" id="file2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file3">File Tambahan 2 (Opsional)</label>
+                        <input type="file" id="file3">
+                    </div>
+
+                    <button type="submit" id="btnUpload" class="btn-primary">
+                        <span id="btnUploadText">Upload ke Spreadsheet</span>
+                        <div class="spinner" id="btnUploadSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+            </main>
+
+            <footer class="footer">
+                <a id="btnBackPresensi" class="secret-link">← Kembali ke Form Presensi</a>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // ⚠️ PASTE URL WEB APP APPS SCRIPT KAMU DI SINI:
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYOUR_SCRIPT_ID_HERE/exec";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tanggal Otomatis Format Indonesia
+            const dateElement = document.getElementById('currentDate');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateElement.textContent = new Date().toLocaleDateString('id-ID', options);
+
+            // Switcher Tampilan (Form Utama <-> Form Upload Rahasia)
+            const viewPresensi = document.getElementById('viewPresensi');
+            const viewUpload = document.getElementById('viewUpload');
+            const btnSecretPage = document.getElementById('btnSecretPage');
+            const btnBackPresensi = document.getElementById('btnBackPresensi');
+
+            btnSecretPage.addEventListener('click', () => {
+                viewPresensi.classList.add('hidden');
+                viewUpload.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            btnBackPresensi.addEventListener('click', () => {
+                viewUpload.classList.add('hidden');
+                viewPresensi.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Selection Button Divisi (Soft Pink)
+            const divisiButtons = document.querySelectorAll('#divisiGroup .pill-btn');
+            const divisiInput = document.getElementById('divisi');
+
+            divisiButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    divisiButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    divisiInput.value = btn.dataset.value;
+                });
+            });
+
+            // Selection Button Status Kehadiran
+            const statusButtons = document.querySelectorAll('#statusGroup .pill-btn');
+            const statusInput = document.getElementById('status');
+
+            statusButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    statusButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    statusInput.value = btn.dataset.value;
+                });
+            });
+
+            // Handler Form Presensi
+            const presensiForm = document.getElementById('presensiForm');
+            const btnSubmit = document.getElementById('btnSubmit');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+
+            presensiForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                if (!divisiInput.value) {
+                    showToast('Silakan pilih Divisi terlebih dahulu!', true);
+                    return;
+                }
+
+                btnSubmit.disabled = true;
+                btnText.textContent = 'Mengirim...';
+                btnSpinner.style.display = 'block';
+
+                const formData = new FormData(presensiForm);
+                formData.append('action', 'presensi');
+
+                fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                .then(res => res.json())
+                .then(response => {
+                    if (response.result === 'success') {
+                        showToast('✅ Presensi berhasil dikirim!');
+                        presensiForm.reset();
+                        divisiButtons.forEach(b => b.classList.remove('active'));
+                        divisiInput.value = '';
+                        statusButtons.forEach(b => b.classList.remove('active'));
+                        statusButtons[0].classList.add('active');
+                        statusInput.value = 'Hadir';
+                    } else {
+                        showToast('❌ Gagal: ' + (response.error || 'Terjadi kesalahan'), true);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error);
+                    showToast('❌ Gagal mengirim. Cek URL Google Script.', true);
+                })
+                .finally(() => {
+                    btnSubmit.disabled = false;
+                    btnText.textContent = 'Kirim Presensi';
+                    btnSpinner.style.display = 'none';
+                });
+            });
+
+            // Handler Form Secret Upload (1 - 3 File)
+            const uploadForm = document.getElementById('uploadForm');
+            const btnUpload = document.getElementById('btnUpload');
+            const btnUploadText = document.getElementById('btnUploadText');
+            const btnUploadSpinner = document.getElementById('btnUploadSpinner');
+
+            uploadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const file1 = document.getElementById('file1').files[0];
+                const file2 = document.getElementById('file2').files[0];
+                const file3 = document.getElementById('file3').files[0];
+
+                btnUpload.disabled = true;
+                btnUploadText.textContent = 'Memproses File...';
+                btnUploadSpinner.style.display = 'block';
+
+                try {
+                    const file1Data = file1 ? await fileToBase64(file1) : null;
+                    const file2Data = file2 ? await fileToBase64(file2) : null;
+                    const file3Data = file3 ? await fileToBase64(file3) : null;
+
+                    const payload = {
+                        action: 'upload',
+                        nama: document.getElementById('uploaderNama').value,
+                        keterangan: document.getElementById('keterangan').value,
+                        files: [file1Data, file2Data, file3Data].filter(f => f !== null)
+                    };
+
+                    btnUploadText.textContent = 'Mengunggah...';
+
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.result === 'success') {
+                        showToast('✅ Berkas berhasil diunggah ke Drive & Spreadsheet!');
+                        uploadForm.reset();
+                    } else {
+                        showToast('❌ Gagal: ' + (result.error || 'Terjadi kesalahan'), true);
+                    }
+                } catch (err) {
+                    console.error(err);
+                    showToast('❌ Terjadi kesalahan saat mengunggah file.', true);
+                } finally {
+                    btnUpload.disabled = false;
+                    btnUploadText.textContent = 'Upload ke Spreadsheet';
+                    btnUploadSpinner.style.display = 'none';
+                }
+            });
+        });
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    resolve({
+                        fileName: file.name,
+                        mimeType: file.type,
+                        base64: reader.result.split(',')[1]
+                    });
+                };
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            if (isError) toast.classList.add('error');
+            else toast.classList.remove('error');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+    </script>
+</body>
+</html>
