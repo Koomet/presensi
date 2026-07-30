@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presensi Ekstrakurikuler Administrator</title>
+    <title>Presensi SUBSIE Administrator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             /* Tema Palet Warna Biru Modern */
@@ -16,16 +18,16 @@
             --text-muted: #64748b;
             --border-color: #cbd5e1;
             --input-bg: #ffffff;
-            
+
             /* Warna Biru khusus Pill Active Divisi */
             --blue-soft: #eff6ff;
             --blue-border: #93c5fd;
             --blue-text: #1d4ed8;
-            
+
             /* Warna Utama Tombol & Accent */
             --primary-btn: #2563eb;
             --primary-btn-hover: #1d4ed8;
-            
+
             --radius-md: 14px;
             --radius-lg: 20px;
         }
@@ -249,7 +251,7 @@
             border-radius: 50px;
             font-size: 14px;
             font-weight: 500;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 9999;
         }
@@ -266,28 +268,32 @@
         .spinner {
             width: 18px;
             height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top-color: #ffffff;
             animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
-        
+
         <!-- ==================== HALAMAN 1: FORM PRESENSI ==================== -->
         <div id="viewPresensi">
             <header class="header">
-                <div class="badge">EKSTRAKURIKULER</div>
+                <div class="badge">TECHNICHAL MEETING</div>
                 <h1 class="title">Presensi Administrator</h1>
                 <div class="date-container">
-                    <svg class="calendar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="calendar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                         <line x1="16" y1="2" x2="16" y2="6"></line>
                         <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -307,38 +313,18 @@
                     <!-- Nama Lengkap -->
                     <div class="form-group">
                         <label for="nama">Nama lengkap</label>
-                        <input type="text" id="nama" name="nama" placeholder="Contoh: Talulah Artorius" required autocomplete="off">
+                        <input type="text" id="nama" name="nama" placeholder="Contoh: Talulah Artorius" required
+                            autocomplete="off">
                     </div>
 
                     <!-- Dropdown Kelas (QoL) -->
-               <!-- Input Kelas (QoL Interactive 2-Tap) -->
-<div class="form-group">
-    <label>Kelas</label>
-    <input type="hidden" id="kelas" name="kelas" required>
 
-    <!-- Step 1: Pilih Tingkat -->
-    <div class="class-level-group">
-        <button type="button" class="level-btn" data-prefix="X-E">10 (X-E)</button>
-        <button type="button" class="level-btn" data-prefix="XI-F">11 (XI-F)</button>
-        <button type="button" class="level-btn" data-prefix="XII-F">12 (XII-F)</button>
-    </div>
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+                        <input type="text" id="kelas" name="kelas" placeholder="Contoh : XE 1" required
+                            autocomplete="off">
+                    </div>
 
-    <!-- Step 2: Pilih Nomor (Grid 1 - 12) -->
-    <div class="class-number-grid hidden" id="classNumberGrid">
-        <button type="button" class="num-btn" data-num="1">1</button>
-        <button type="button" class="num-btn" data-num="2">2</button>
-        <button type="button" class="num-btn" data-num="3">3</button>
-        <button type="button" class="num-btn" data-num="4">4</button>
-        <button type="button" class="num-btn" data-num="5">5</button>
-        <button type="button" class="num-btn" data-num="6">6</button>
-        <button type="button" class="num-btn" data-num="7">7</button>
-        <button type="button" class="num-btn" data-num="8">8</button>
-        <button type="button" class="num-btn" data-num="9">9</button>
-        <button type="button" class="num-btn" data-num="10">10</button>
-        <button type="button" class="num-btn" data-num="11">11</button>
-        <button type="button" class="num-btn" data-num="12">12</button>
-    </div>
-</div>
                     <!-- Divisi Selection -->
                     <div class="form-group">
                         <label>Divisi</label>
@@ -353,7 +339,8 @@
                     <!-- Catatan Opsional -->
                     <div class="form-group">
                         <label for="catatan">Catatan (opsional)</label>
-                        <input type="text" id="catatan" name="catatan" placeholder="Contoh: Terlambat 10 menit / Ada kegiatan" autocomplete="off">
+                        <input type="text" id="catatan" name="catatan"
+                            placeholder="Contoh: Terlambat 10 menit / Ada kegiatan" autocomplete="off">
                     </div>
 
                     <button type="submit" id="btnSubmit" class="btn-primary">
@@ -377,7 +364,8 @@
             <header class="header">
                 <div class="badge">RAHASIA / ADMIN ONLY</div>
                 <h1 class="title">Upload Berkas Admin</h1>
-                <p style="color: #64748b; font-size: 14px;">Unggah 1 sampai 3 file dokumen/bukti ke Google Drive & Spreadsheet</p>
+                <p style="color: #64748b; font-size: 14px;">Unggah 1 sampai 3 file dokumen/bukti ke Google Drive &
+                    Spreadsheet</p>
             </header>
 
             <main class="card">
@@ -386,12 +374,14 @@
                 <form id="uploadForm">
                     <div class="form-group">
                         <label for="uploaderNama">Nama Pengunggah</label>
-                        <input type="text" id="uploaderNama" placeholder="Contoh: Admin Programming" required autocomplete="off">
+                        <input type="text" id="uploaderNama" placeholder="Contoh: Admin Programming" required
+                            autocomplete="off">
                     </div>
 
                     <div class="form-group">
                         <label for="keterangan">Keterangan Dokumen</label>
-                        <input type="text" id="keterangan" placeholder="Contoh: Laporan / Bukti Surat" required autocomplete="off">
+                        <input type="text" id="keterangan" placeholder="Contoh: Laporan / Bukti Surat" required
+                            autocomplete="off">
                     </div>
 
                     <div class="form-group">
@@ -488,26 +478,26 @@
                 formData.append('action', 'presensi');
 
                 fetch(SCRIPT_URL, { method: 'POST', body: formData })
-                .then(res => res.json())
-                .then(response => {
-                    if (response.result === 'success') {
-                        showToast('✅ Presensi berhasil dikirim!');
-                        presensiForm.reset();
-                        divisiButtons.forEach(b => b.classList.remove('active'));
-                        divisiInput.value = '';
-                    } else {
-                        showToast('❌ Gagal: ' + (response.error || 'Terjadi kesalahan'), true);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error!', error);
-                    showToast('❌ Gagal mengirim. Cek URL Google Script.', true);
-                })
-                .finally(() => {
-                    btnSubmit.disabled = false;
-                    btnText.textContent = 'Kirim Presensi';
-                    btnSpinner.style.display = 'none';
-                });
+                    .then(res => res.json())
+                    .then(response => {
+                        if (response.result === 'success') {
+                            showToast('✅ Presensi berhasil dikirim!');
+                            presensiForm.reset();
+                            divisiButtons.forEach(b => b.classList.remove('active'));
+                            divisiInput.value = '';
+                        } else {
+                            showToast('❌ Gagal: ' + (response.error || 'Terjadi kesalahan'), true);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error!', error);
+                        showToast('❌ Gagal mengirim. Cek URL Google Script.', true);
+                    })
+                    .finally(() => {
+                        btnSubmit.disabled = false;
+                        btnText.textContent = 'Kirim Presensi';
+                        btnSpinner.style.display = 'none';
+                    });
             });
 
             // Handler Form Secret Upload
@@ -591,4 +581,5 @@
         }
     </script>
 </body>
+
 </html>
