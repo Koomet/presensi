@@ -9,20 +9,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fbfbfa;
+            /* Tema Palet Warna Biru Modern */
+            --bg-color: #f0f7ff;
             --card-bg: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --border-color: #e2e8f0;
+            --border-color: #cbd5e1;
             --input-bg: #ffffff;
             
-            /* Warna Soft Pink khusus Divisi */
-            --pink-soft: #fce7f3;
-            --pink-border: #fbcfe8;
-            --pink-text: #db2777;
+            /* Warna Biru khusus Pill Active Divisi */
+            --blue-soft: #eff6ff;
+            --blue-border: #93c5fd;
+            --blue-text: #1d4ed8;
             
-            --primary-btn: #1e293b;
-            --primary-btn-hover: #0f172a;
+            /* Warna Utama Tombol & Accent */
+            --primary-btn: #2563eb;
+            --primary-btn-hover: #1d4ed8;
             
             --radius-md: 14px;
             --radius-lg: 20px;
@@ -57,14 +59,14 @@
 
         .badge {
             display: inline-block;
-            padding: 4px 14px;
-            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border: 1px solid #bfdbfe;
             border-radius: 50px;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 1px;
-            color: var(--text-muted);
-            background-color: #ffffff;
+            color: #1e40af;
+            background-color: #dbeafe;
             margin-bottom: 12px;
         }
 
@@ -92,10 +94,10 @@
         /* Card Container */
         .card {
             background: var(--card-bg);
-            border: 1px solid #eaeaea;
+            border: 1px solid #e2e8f0;
             border-radius: var(--radius-lg);
             padding: 28px 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.05);
             transition: all 0.3s ease;
         }
 
@@ -106,25 +108,6 @@
             color: var(--text-main);
         }
 
-    /* toggle switch button to dark mode */
-       <label class="switch">
-  <input class="switch__input" type="checkbox" role="switch" />
-  <span class="switch__icon">
-    <span class="switch__icon-part switch__icon-part--1"></span>
-    <span class="switch__icon-part switch__icon-part--2"></span>
-    <span class="switch__icon-part switch__icon-part--3"></span>
-    <span class="switch__icon-part switch__icon-part--4"></span>
-    <span class="switch__icon-part switch__icon-part--5"></span>
-    <span class="switch__icon-part switch__icon-part--6"></span>
-    <span class="switch__icon-part switch__icon-part--7"></span>
-    <span class="switch__icon-part switch__icon-part--8"></span>
-    <span class="switch__icon-part switch__icon-part--9"></span>
-    <span class="switch__icon-part switch__icon-part--10"></span>
-    <span class="switch__icon-part switch__icon-part--11"></span>
-  </span>
-  <span class="switch__sr">Dark Mode</span>
-</label>
-        
         /* Form Elements */
         .form-group {
             margin-bottom: 20px;
@@ -139,7 +122,8 @@
         }
 
         input[type="text"],
-        input[type="file"] {
+        input[type="file"],
+        select {
             width: 100%;
             padding: 12px 16px;
             font-size: 14px;
@@ -151,13 +135,24 @@
             transition: all 0.2s ease;
         }
 
+        /* Style Khusus Dropdown Select */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            cursor: pointer;
+        }
+
         input[type="text"]::placeholder {
             color: #94a3b8;
         }
 
-        input[type="text"]:focus {
-            border-color: #94a3b8;
-            box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.15);
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
         /* Pill Buttons */
@@ -165,10 +160,6 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-        }
-
-        .pill-group.status-group {
-            flex-direction: row;
         }
 
         .pill-btn {
@@ -189,18 +180,11 @@
             background-color: #f8fafc;
         }
 
-        /* Active State - Soft Pink untuk Divisi */
+        /* Active State - Soft Blue untuk Divisi */
         .pill-btn.active {
-            background-color: var(--pink-soft);
-            border-color: var(--pink-border);
-            color: var(--pink-text);
-        }
-
-        /* Active State - Biru Soft untuk Status */
-        .status-group .pill-btn.active {
-            background-color: #e0f2fe;
-            border-color: #bae6fd;
-            color: #0284c7;
+            background-color: var(--blue-soft);
+            border-color: var(--blue-border);
+            color: var(--blue-text);
         }
 
         /* Button Utama */
@@ -238,14 +222,14 @@
 
         .secret-link {
             font-size: 12px;
-            color: #94a3b8;
+            color: #64748b;
             text-decoration: none;
             cursor: pointer;
             transition: color 0.2s;
         }
 
         .secret-link:hover {
-            color: #64748b;
+            color: #2563eb;
         }
 
         /* Switcher Halaman */
@@ -317,16 +301,42 @@
                 <h2 class="card-title">Isi Presensi</h2>
 
                 <form id="presensiForm">
+                    <!-- Status dikirim tersembunyi sebagai 'Hadir' secara otomatis -->
+                    <input type="hidden" id="status" name="status" value="Hadir">
+
+                    <!-- Nama Lengkap -->
                     <div class="form-group">
                         <label for="nama">Nama lengkap</label>
-                        <input type="text" id="nama" name="nama" placeholder="Contoh: Nadia Rahmawati" required autocomplete="off">
+                        <input type="text" id="nama" name="nama" placeholder="Contoh: Talulah Artorius" required autocomplete="off">
                     </div>
 
+                    <!-- Dropdown Kelas (QoL) -->
                     <div class="form-group">
                         <label for="kelas">Kelas</label>
-                        <input type="text" id="kelas" name="kelas" placeholder="Contoh: XI IPA 3" required autocomplete="off">
+                        <select id="kelas" name="kelas" required>
+                            <option value="" disabled selected>Pilih Kelas...</option>
+                            <optgroup label="Kelas X">
+                                <option value="X IPA 1">X IPA 1</option>
+                                <option value="X IPA 2">X IPA 2</option>
+                                <option value="X IPS 1">X IPS 1</option>
+                                <option value="X IPS 2">X IPS 2</option>
+                            </optgroup>
+                            <optgroup label="Kelas XI">
+                                <option value="XI IPA 1">XI IPA 1</option>
+                                <option value="XI IPA 2">XI IPA 2</option>
+                                <option value="XI IPS 1">XI IPS 1</option>
+                                <option value="XI IPS 2">XI IPS 2</option>
+                            </optgroup>
+                            <optgroup label="Kelas XII">
+                                <option value="XII IPA 1">XII IPA 1</option>
+                                <option value="XII IPA 2">XII IPA 2</option>
+                                <option value="XII IPS 1">XII IPS 1</option>
+                                <option value="XII IPS 2">XII IPS 2</option>
+                            </optgroup>
+                        </select>
                     </div>
 
+                    <!-- Divisi Selection -->
                     <div class="form-group">
                         <label>Divisi</label>
                         <input type="hidden" id="divisi" name="divisi" required>
@@ -337,19 +347,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Status kehadiran</label>
-                        <input type="hidden" id="status" name="status" value="Hadir" required>
-                        <div class="pill-group status-group" id="statusGroup">
-                            <button type="button" class="pill-btn status-btn active" data-value="Hadir">Hadir</button>
-                            <button type="button" class="pill-btn status-btn" data-value="Izin">Izin</button>
-                            <button type="button" class="pill-btn status-btn" data-value="Sakit">Sakit</button>
-                        </div>
-                    </div>
-
+                    <!-- Catatan Opsional -->
                     <div class="form-group">
                         <label for="catatan">Catatan (opsional)</label>
-                        <input type="text" id="catatan" name="catatan" placeholder="Contoh: Terlambat 10 menit / Izin Lomba" autocomplete="off">
+                        <input type="text" id="catatan" name="catatan" placeholder="Contoh: Terlambat 10 menit / Ada kegiatan" autocomplete="off">
                     </div>
 
                     <button type="submit" id="btnSubmit" class="btn-primary">
@@ -424,7 +425,6 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // ⚠️ PASTE URL WEB APP APPS SCRIPT KAMU DI SINI:
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQ5lEYE1VGJpk3zWW821AtnxZZdhgYnNcFeEsxhVfDTf-5q0uUhIvA417UBvJss2RW/exec";
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -451,7 +451,7 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Selection Button Divisi (Soft Pink)
+            // Selection Button Divisi (Soft Blue Highlight)
             const divisiButtons = document.querySelectorAll('#divisiGroup .pill-btn');
             const divisiInput = document.getElementById('divisi');
 
@@ -460,18 +460,6 @@
                     divisiButtons.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     divisiInput.value = btn.dataset.value;
-                });
-            });
-
-            // Selection Button Status Kehadiran
-            const statusButtons = document.querySelectorAll('#statusGroup .pill-btn');
-            const statusInput = document.getElementById('status');
-
-            statusButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    statusButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    statusInput.value = btn.dataset.value;
                 });
             });
 
@@ -504,9 +492,6 @@
                         presensiForm.reset();
                         divisiButtons.forEach(b => b.classList.remove('active'));
                         divisiInput.value = '';
-                        statusButtons.forEach(b => b.classList.remove('active'));
-                        statusButtons[0].classList.add('active');
-                        statusInput.value = 'Hadir';
                     } else {
                         showToast('❌ Gagal: ' + (response.error || 'Terjadi kesalahan'), true);
                     }
@@ -522,7 +507,7 @@
                 });
             });
 
-            // Handler Form Secret Upload (1 - 3 File)
+            // Handler Form Secret Upload
             const uploadForm = document.getElementById('uploadForm');
             const btnUpload = document.getElementById('btnUpload');
             const btnUploadText = document.getElementById('btnUploadText');
