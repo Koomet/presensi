@@ -11,13 +11,13 @@
         rel="stylesheet">
     <style>
         :root {
-            /* Tema Palet Warna Biru Modern */
-            --bg-color: #f0f7ff;
+            /* Tema Palet Warna Biru Accent (Light Mode) */
+            --bg-color: #e0f2fe; /* Aksen biru terang */
             --card-bg: #ffffff;
-            --text-main: #0f172a;
+            --text-main: #0f172a; /* Teks Hitam/Gelap */
             --text-muted: #64748b;
             --border-color: #cbd5e1;
-            --input-bg: #ffffff;
+            --input-bg: #f8fafc;
 
             /* Warna Biru khusus Pill Active Divisi */
             --blue-soft: #eff6ff;
@@ -30,6 +30,25 @@
 
             --radius-md: 14px;
             --radius-lg: 20px;
+            
+            /* Toggle Variables */
+            --hue: 223;
+            --trans-dur: 0.4s;
+            --trans-timing: cubic-bezier(0.65,0,0.35,1);
+        }
+
+        /* Variabel saat Dark Mode Aktif */
+        body:has(.switch__input:checked) {
+            --bg-color: #020617; /* Biru sangat gelap */
+            --card-bg: #0f172a;
+            --text-main: #f8fafc; /* Teks Putih agar terbaca */
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --input-bg: #1e293b;
+            
+            --blue-soft: #1e3a8a;
+            --blue-border: #3b82f6;
+            --blue-text: #bfdbfe;
         }
 
         * {
@@ -37,6 +56,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            transition: background-color var(--trans-dur), color var(--trans-dur), border-color var(--trans-dur);
         }
 
         body {
@@ -62,13 +82,13 @@
         .badge {
             display: inline-block;
             padding: 6px 14px;
-            border: 1px solid #bfdbfe;
+            border: 1px solid var(--blue-border);
             border-radius: 50px;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 1px;
-            color: #1e40af;
-            background-color: #dbeafe;
+            color: var(--blue-text);
+            background-color: var(--blue-soft);
             margin-bottom: 12px;
         }
 
@@ -93,207 +113,156 @@
             stroke: var(--text-muted);
         }
 
-        * {
-            /* toogle dark mode */
-          border: 0;
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
+        /* TOGGLE DARK MODE (Dipindah ke Kanan Bawah) */
+        .switch-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            font-size: 20px; /* Base size untuk switch */
+            background: var(--card-bg);
+            padding: 8px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
         }
-        :root {
-          --hue: 223;
-          --trans-dur: 0.4s;
-          --trans-timing: cubic-bezier(0.65,0,0.35,1);
-          font-size: calc(40px + (80 - 40) * (100vw - 320px) / (2560 - 320));
-        }
-        body,
-        input {
-          color: hsl(var(--hue),10%,10%);
-          font: 1em/1.5 sans-serif;
-        }
-        body {
-          background-color: hsl(var(--hue),10%,90%);
-          display: flex;
-          height: 100vh;
-          transition:
-            background-color var(--trans-dur),
-            color var(--trans-dur);
-        }
+        
         .switch,
         .switch__input {
-          position: relative;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .switch {
-          margin: auto;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
         }
         .switch__input,
         .switch__input:before {
-          background-color: hsl(var(--hue),10%,10%);
+            background-color: hsl(var(--hue),10%,10%);
         }
         .switch__input {
-          border-radius: 0.75em;
-          cursor: pointer;
-          display: block;
-          width: 3em;
-          height: 1.5em;
-          transition: background-color var(--trans-dur) var(--trans-timing);
-          -webkit-appearance: none;
-          appearance: none;
+            border-radius: 0.75em;
+            cursor: pointer;
+            display: block;
+            width: 3em;
+            height: 1.5em;
+            transition: background-color var(--trans-dur) var(--trans-timing);
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
         }
         .switch__input:before {
-          border-radius: 50%;
-          content: "";
-          display: block;
-          position: absolute;
-          top: 0.125em;
-          left: 0.125em;
-          width: 1.25em;
-          height: 1.25em;
-          transition:
-            background-color var(--trans-dur) var(--trans-timing),
-            transform var(--trans-dur) var(--trans-timing);
+            border-radius: 50%;
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0.125em;
+            left: 0.125em;
+            width: 1.25em;
+            height: 1.25em;
+            transition:
+                background-color var(--trans-dur) var(--trans-timing),
+                transform var(--trans-dur) var(--trans-timing);
         }
         .switch__icon,
         .switch__icon-part {
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         .switch__icon {
-          background-color: hsl(var(--hue),10%,90%);
-          border-radius: 50%;
-          overflow: hidden;
-          pointer-events: none;
-          top: 0.125em;
-          left: 0.125em;
-          width: 1.25em;
-          height: 1.25em;
-          transition: transform var(--trans-dur) var(--trans-timing);
+            background-color: hsl(var(--hue),10%,90%);
+            border-radius: 50%;
+            overflow: hidden;
+            pointer-events: none;
+            top: 0.125em;
+            left: 0.125em;
+            width: 1.25em;
+            height: 1.25em;
+            transition: transform var(--trans-dur) var(--trans-timing);
         }
         .switch__icon-part {
-          transition:
-            box-shadow var(--trans-dur) var(--trans-timing),
-            transform var(--trans-dur) var(--trans-timing);
+            transition:
+                box-shadow var(--trans-dur) var(--trans-timing),
+                transform var(--trans-dur) var(--trans-timing);
         }
         .switch__icon-part--1,
         .switch__icon-part--2,
         .switch__icon-part--3 {
-          border-radius: 50%;
+            border-radius: 50%;
         }
         .switch__icon-part--1 {
-          background-color: hsl(var(--hue),10%,90%);
-          top: calc(50% - 0.375em);
-          left: calc(50% - 0.375em);
-          width: 0.75em;
-          height: 0.75em;
+            background-color: hsl(var(--hue),10%,90%);
+            top: calc(50% - 0.375em);
+            left: calc(50% - 0.375em);
+            width: 0.75em;
+            height: 0.75em;
         }
         .switch__icon-part--2 {
-          background-color: hsl(var(--hue),10%,10%);
-          top: calc(50% - 0.4375em);
-          left: calc(50% - 0.0625em);
-          width: 0.5em;
-          height: 0.5em;
-          transform: translate(-0.1875em,0.1875em) scale(0.2);
+            background-color: hsl(var(--hue),10%,10%);
+            top: calc(50% - 0.4375em);
+            left: calc(50% - 0.0625em);
+            width: 0.5em;
+            height: 0.5em;
+            transform: translate(-0.1875em,0.1875em) scale(0.2);
         }
         .switch__icon-part--3 {
-          box-shadow: 0 0 0 0.625em hsl(var(--hue),10%,10%) inset;
-          width: 1.25em;
-          height: 1.25em;
-          transform: scale(0.25);
+            box-shadow: 0 0 0 0.625em hsl(var(--hue),10%,10%) inset;
+            width: 1.25em;
+            height: 1.25em;
+            transform: scale(0.25);
         }
         .switch__icon-part--3 ~ .switch__icon-part {
-          background-color: hsl(var(--hue),10%,10%);
-          border-radius: 0.0625em;
-          top: 50%;
-          left: 50%;
-          width: 0.125em;
-          height: 0.1875em;
-          transform-origin: 50% 0;
+            background-color: hsl(var(--hue),10%,10%);
+            border-radius: 0.0625em;
+            top: 50%;
+            left: 50%;
+            width: 0.125em;
+            height: 0.1875em;
+            transform-origin: 50% 0;
         }
-        .switch__icon-part--4 {
-          transform: translateX(-50%) rotate(0) translateY(0.25em);
-        }
-        .switch__icon-part--5 {
-          transform: translateX(-50%) rotate(45deg) translateY(0.25em);
-        }
-        .switch__icon-part--6 {
-          transform: translateX(-50%) rotate(90deg) translateY(0.25em);
-        }
-        .switch__icon-part--7 {
-          transform: translateX(-50%) rotate(135deg) translateY(0.25em);
-        }
-        .switch__icon-part--8 {
-          transform: translateX(-50%) rotate(180deg) translateY(0.25em);
-        }
-        .switch__icon-part--9 {
-          transform: translateX(-50%) rotate(225deg) translateY(0.25em);
-        }
-        .switch__icon-part--10 {
-          transform: translateX(-50%) rotate(270deg) translateY(0.25em);
-        }
-        .switch__icon-part--11 {
-          transform: translateX(-50%) rotate(315deg) translateY(0.25em);
-        }
+        .switch__icon-part--4 { transform: translateX(-50%) rotate(0) translateY(0.25em); }
+        .switch__icon-part--5 { transform: translateX(-50%) rotate(45deg) translateY(0.25em); }
+        .switch__icon-part--6 { transform: translateX(-50%) rotate(90deg) translateY(0.25em); }
+        .switch__icon-part--7 { transform: translateX(-50%) rotate(135deg) translateY(0.25em); }
+        .switch__icon-part--8 { transform: translateX(-50%) rotate(180deg) translateY(0.25em); }
+        .switch__icon-part--9 { transform: translateX(-50%) rotate(225deg) translateY(0.25em); }
+        .switch__icon-part--10 { transform: translateX(-50%) rotate(270deg) translateY(0.25em); }
+        .switch__icon-part--11 { transform: translateX(-50%) rotate(315deg) translateY(0.25em); }
         .switch__sr {
-          overflow: hidden;
-          position: absolute;
-          width: 1px;
-          height: 1px;
+            overflow: hidden;
+            position: absolute;
+            width: 1px;
+            height: 1px;
         }
         
-        /* `:checked` state */
         .switch__input:checked {
-          background-color: hsl(var(--hue),10%,90%);
+            background-color: hsl(var(--hue),10%,90%);
         }
         .switch__input:checked:before,
         .switch__input:checked ~ .switch__icon {
-          transform: translateX(1.5em);
+            transform: translateX(1.5em);
         }
         .switch__input:checked ~ .switch__icon .switch__icon-part--2 {
-          transform: translate(0,0) scale(1);
+            transform: translate(0,0) scale(1);
         }
         .switch__input:checked ~ .switch__icon .switch__icon-part--3 {
-          box-shadow: 0 0 0 0.25em hsl(var(--hue),10%,10%) inset;
-          transform: scale(1);
+            box-shadow: 0 0 0 0.25em hsl(var(--hue),10%,10%) inset;
+            transform: scale(1);
         }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--4 {
-          transform: translateX(-50%) rotate(0) translateY(0.625em) scale(0);
-        }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--5 {
-          transform: translateX(-50%) rotate(45deg) translateY(0.625em) scale(0);
-        }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--6 {
-          transform: translateX(-50%) rotate(90deg) translateY(0.625em) scale(0);
-        }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--7 {
-          transform: translateX(-50%) rotate(135deg) translateY(0.625em) scale(0);
-        }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--8 {
-          transform: translateX(-50%) rotate(180deg) translateY(0.625em) scale(0);
-        }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--9 {
-          transform: translateX(-50%) rotate(225deg) translateY(0.625em) scale(0);
-        }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--10 {
-          transform: translateX(-50%) rotate(270deg) translateY(0.625em) scale(0);
-        }
-        .switch__input:checked ~ .switch__icon .switch__icon-part--11 {
-          transform: translateX(-50%) rotate(315deg) translateY(0.625em) scale(0);
-        }
-        body:has(.switch__input:checked) {
-          background-color: hsl(var(--hue),10%,10%);
-          color: hsl(var(--hue),10%,90%);
-        }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--4 { transform: translateX(-50%) rotate(0) translateY(0.625em) scale(0); }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--5 { transform: translateX(-50%) rotate(45deg) translateY(0.625em) scale(0); }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--6 { transform: translateX(-50%) rotate(90deg) translateY(0.625em) scale(0); }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--7 { transform: translateX(-50%) rotate(135deg) translateY(0.625em) scale(0); }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--8 { transform: translateX(-50%) rotate(180deg) translateY(0.625em) scale(0); }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--9 { transform: translateX(-50%) rotate(225deg) translateY(0.625em) scale(0); }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--10 { transform: translateX(-50%) rotate(270deg) translateY(0.625em) scale(0); }
+        .switch__input:checked ~ .switch__icon .switch__icon-part--11 { transform: translateX(-50%) rotate(315deg) translateY(0.625em) scale(0); }
+
         /* Card Container */
         .card {
             background: var(--card-bg);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             padding: 28px 24px;
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.05);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
         .card-title {
@@ -312,7 +281,7 @@
             display: block;
             font-size: 14px;
             font-weight: 600;
-            color: #334155;
+            color: var(--text-main);
             margin-bottom: 8px;
         }
 
@@ -330,18 +299,8 @@
             transition: all 0.2s ease;
         }
 
-        /* Style Khusus Dropdown Select */
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 14px center;
-            background-size: 16px;
-            cursor: pointer;
-        }
-
         input[type="text"]::placeholder {
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
         input[type="text"]:focus,
@@ -360,19 +319,19 @@
         .pill-btn {
             width: 100%;
             padding: 12px 16px;
-            background-color: #ffffff;
+            background-color: var(--input-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
             font-size: 14px;
             font-weight: 600;
-            color: #475569;
+            color: var(--text-main);
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: center;
         }
 
         .pill-btn:hover {
-            background-color: #f8fafc;
+            border-color: #94a3b8;
         }
 
         /* Active State - Soft Blue untuk Divisi */
@@ -417,14 +376,14 @@
 
         .secret-link {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-muted);
             text-decoration: none;
             cursor: pointer;
             transition: color 0.2s;
         }
 
         .secret-link:hover {
-            color: #2563eb;
+            color: var(--primary-btn);
         }
 
         /* Switcher Halaman */
@@ -435,9 +394,9 @@
         /* Toast Notifikasi */
         .toast {
             position: fixed;
-            bottom: 24px;
+            bottom: 80px; /* Disesuaikan agar tidak tertutup tombol dark mode */
             left: 50%;
-            transform: translateX(-50%) translateY(100px);
+            transform: translateX(-50%) translateY(150px);
             background-color: #0f172a;
             color: #fff;
             padding: 12px 24px;
@@ -476,26 +435,30 @@
 </head>
 
 <body>
+    
+    <!-- Tombol Toggle Kanan Bawah -->
+    <div class="switch-container">
+        <label class="switch">
+            <input class="switch__input" type="checkbox" role="switch" id="darkModeToggle" />
+            <span class="switch__icon">
+                <span class="switch__icon-part switch__icon-part--1"></span>
+                <span class="switch__icon-part switch__icon-part--2"></span>
+                <span class="switch__icon-part switch__icon-part--3"></span>
+                <span class="switch__icon-part switch__icon-part--4"></span>
+                <span class="switch__icon-part switch__icon-part--5"></span>
+                <span class="switch__icon-part switch__icon-part--6"></span>
+                <span class="switch__icon-part switch__icon-part--7"></span>
+                <span class="switch__icon-part switch__icon-part--8"></span>
+                <span class="switch__icon-part switch__icon-part--9"></span>
+                <span class="switch__icon-part switch__icon-part--10"></span>
+                <span class="switch__icon-part switch__icon-part--11"></span>
+            </span>
+            <span class="switch__sr">Dark Mode</span>
+        </label>
+    </div>
 
     <div class="container">
 
-        <label class="switch">
-  <input class="switch__input" type="checkbox" role="switch" />
-  <span class="switch__icon">
-    <span class="switch__icon-part switch__icon-part--1"></span>
-    <span class="switch__icon-part switch__icon-part--2"></span>
-    <span class="switch__icon-part switch__icon-part--3"></span>
-    <span class="switch__icon-part switch__icon-part--4"></span>
-    <span class="switch__icon-part switch__icon-part--5"></span>
-    <span class="switch__icon-part switch__icon-part--6"></span>
-    <span class="switch__icon-part switch__icon-part--7"></span>
-    <span class="switch__icon-part switch__icon-part--8"></span>
-    <span class="switch__icon-part switch__icon-part--9"></span>
-    <span class="switch__icon-part switch__icon-part--10"></span>
-    <span class="switch__icon-part switch__icon-part--11"></span>
-  </span>
-  <span class="switch__sr">Dark Mode</span>
-</label>
         <!-- ==================== HALAMAN 1: FORM PRESENSI ==================== -->
         <div id="viewPresensi">
             <header class="header">
@@ -527,8 +490,7 @@
                             autocomplete="off">
                     </div>
 
-                    <!-- Dropdown Kelas (QoL) -->
-
+                    <!-- Input Kelas -->
                     <div class="form-group">
                         <label for="kelas">Kelas</label>
                         <input type="text" id="kelas" name="kelas" placeholder="Contoh : XE 1" required
@@ -574,12 +536,12 @@
             <header class="header">
                 <div class="badge">RAHASIA / ADMIN ONLY</div>
                 <h1 class="title">Upload Berkas Admin</h1>
-                <p style="color: #64748b; font-size: 14px;">Unggah 1 sampai 3 file dokumen/bukti ke Google Drive &
-                    Spreadsheet</p>
+                <p style="color: var(--text-muted); font-size: 14px;">Unggah 1 sampai 3 file dokumen/bukti ke Google Drive &
+                    Spreadsheet (Maks. 2MB per file)</p>
             </header>
 
             <main class="card">
-                <h2 class="card-title">Upload File (Max 3 Files)</h2>
+                <h2 class="card-title">Upload File</h2>
 
                 <form id="uploadForm">
                     <div class="form-group">
@@ -595,17 +557,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="file1">File Utama (Wajib)</label>
+                        <label for="file1">File Utama (Wajib, Max 2MB)</label>
                         <input type="file" id="file1" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="file2">File Tambahan 1 (Opsional)</label>
+                        <label for="file2">File Tambahan 1 (Opsional, Max 2MB)</label>
                         <input type="file" id="file2">
                     </div>
 
                     <div class="form-group">
-                        <label for="file3">File Tambahan 2 (Opsional)</label>
+                        <label for="file3">File Tambahan 2 (Opsional, Max 2MB)</label>
                         <input type="file" id="file3">
                     </div>
 
@@ -629,12 +591,22 @@
     <!-- JavaScript Logic -->
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQ5lEYE1VGJpk3zWW821AtnxZZdhgYnNcFeEsxhVfDTf-5q0uUhIvA417UBvJss2RW/exec";
+        const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB dalam bytes
 
         document.addEventListener('DOMContentLoaded', () => {
             // Tanggal Otomatis Format Indonesia
             const dateElement = document.getElementById('currentDate');
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             dateElement.textContent = new Date().toLocaleDateString('id-ID', options);
+
+            // Simpan state dark mode jika di-refresh (opsional & fitur tambahan)
+            const toggleMode = document.getElementById('darkModeToggle');
+            if(localStorage.getItem('dark_mode') === 'true') {
+                toggleMode.checked = true;
+            }
+            toggleMode.addEventListener('change', (e) => {
+                localStorage.setItem('dark_mode', e.target.checked);
+            });
 
             // Switcher Tampilan (Form Utama <-> Form Upload Rahasia)
             const viewPresensi = document.getElementById('viewPresensi');
@@ -654,7 +626,7 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Selection Button Divisi (Soft Blue Highlight)
+            // Selection Button Divisi
             const divisiButtons = document.querySelectorAll('#divisiGroup .pill-btn');
             const divisiInput = document.getElementById('divisi');
 
@@ -722,6 +694,15 @@
                 const file1 = document.getElementById('file1').files[0];
                 const file2 = document.getElementById('file2').files[0];
                 const file3 = document.getElementById('file3').files[0];
+
+                // Validasi Ukuran File (Max 2MB)
+                const filesToCheck = [file1, file2, file3];
+                for (let f of filesToCheck) {
+                    if (f && f.size > MAX_FILE_SIZE) {
+                        showToast(`❌ File "${f.name}" melebihi batas 2MB!`, true);
+                        return; // Berhenti memproses form
+                    }
+                }
 
                 btnUpload.disabled = true;
                 btnUploadText.textContent = 'Memproses File...';
